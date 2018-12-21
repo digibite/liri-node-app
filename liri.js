@@ -57,7 +57,7 @@ const concertThis = str => {
 
 //search for concerts based on a band/artist input
 const concertSearch = str => {
-    
+
     //no default artist searched
     if (str === "") {
         return console.log("Unable to find a concert without a band or artist name.");
@@ -76,7 +76,7 @@ const concertSearch = str => {
 
             //print each concert with the venue name, location, and date; use dotted lines to make more legible
             for (let i = 0; i < info.length; i++) {
-                
+
                 console.log("Venue Name: " + info[i].venue.name);
 
                 if (info[i].venue.region === "") {
@@ -87,7 +87,7 @@ const concertSearch = str => {
 
                 console.log("Concert Date: " + moment(info[i].datetime).format("MM/DD/YYYY"));
             }
-            
+
             //second error check
         }).catch((error) => {
             if (error) {
@@ -128,7 +128,7 @@ const spotifyThis = str => {
         if (data.tracks.items.length === 0)
             return report("Sorry, but we could not find any songs with that title.");
         let info = data.tracks.items;
-        
+
         let artistList = info[0].artists;
         for (let a = 0; a < artistList.length; a++) {
             report("Artist: " + artistList[a].name);
@@ -139,7 +139,7 @@ const spotifyThis = str => {
         else
             report("Preview Link: " + info[0].preview_url);
         report("Album Name: " + info[0].album.name);
-        
+
     });
 
     // axios.get().then(
@@ -151,6 +151,33 @@ const spotifyThis = str => {
     // })
 }
 
+const movieThis = str => {
+   
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "movie",
+            message: "Which movie would you like to search for? "
+        }
+    ]).then(function (artist) {
+        movieSearch(artist.name);
+    });
+    if (str === "") {
+        axios.get("http://www.omdbapi.com/?apikey=trilogy&s=mr+nobody").then(
+            function (resp) {
+                let info = resp.data;
+                console.log(info);
+            }
+        ).catch((error) => {
+            if (error) {
+                console.log("Sorry, but we could not find any information on that artist.");
+            }
+        });
+    } else {
 
+
+
+    }
+}
 
 
