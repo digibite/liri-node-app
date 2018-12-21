@@ -175,8 +175,6 @@ const movieThis = str => {
         });
     } else {
 
-
-
     }
 }
 
